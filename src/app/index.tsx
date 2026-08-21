@@ -1,4 +1,11 @@
-import * as Device from 'expo-device';
+import { Redirect } from 'expo-router';
+
+export default function Index() {
+  return <Redirect href="/(auth)/login"/>;  
+}
+
+
+/*import * as Device from 'expo-device';
 import { Platform, StyleSheet } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
@@ -95,4 +102,4 @@ const styles = StyleSheet.create({
     paddingVertical: Spacing.four,
     borderRadius: Spacing.four,
   },
-});
+});*/
