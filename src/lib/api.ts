@@ -1,4 +1,5 @@
-const API_BASE_URL = 'https://YOUR_API_ID.execute-api.ap-southeast-2.amazonaws.com';    // NEED TO CREATE API BEFORE UPDATING YOUR_API_ID
+/* This file creates an API helper on the frontend of the application */
+const API_BASE_URL = 'https://REPLACE_WITH_YOUR_API_URL'; // Self-explanatory: to replace with API URL from AWS API Gateway.
 
 async function request(path: string, options: RequestInit = {}) {
     const response = await fetch(`${API_BASE_URL}${path}`, {
@@ -8,10 +9,9 @@ async function request(path: string, options: RequestInit = {}) {
             ...(options.headers || {}),
         },
     });
-
     const text = await response.text();
+    
     let data: any;
-
     try {
         data = text ? JSON.parse(text) : {};
     } catch {
@@ -39,17 +39,25 @@ export function login(email: string, password: string) {
     });
 }
 
+// We use the token to get the inventory of for the logged in user.
 export function getInventory(token: string) {
     return request('/inventory', {
-        'headers': {
+        headers: {
             Authorization: `Bearer ${token}`,
         },
     });
 }
 
+// literally adds an inventory item to the logged in user's inventory (this is what the token is used for)
+// attributes with '?' indicate optional for barcode and expiry. 
 export function addInventoryItem(
     token: string,
-    item: { name: string; barcode?: string; quantity: number; expiry?: string },
+    item: {
+        name: string;
+        barcode?: string;
+        quantity: number;
+        expiry?: string;
+    },
 ) {
     return request('/inventory', {
         method: 'POST',
@@ -59,3 +67,17 @@ export function addInventoryItem(
         body: JSON.stringify(item),
     });
 }
+
+export function deleteInventoryItem(token: string, itemId: string) {
+    return request('/inventory', {
+        method: 'DELETE',
+        headers: {
+            Authorization: `Bearer ${token}`,
+        },
+        body: JSON.stringify({ itemId }),
+    });
+}
+
+
+
+

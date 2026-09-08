@@ -1,13 +1,15 @@
-import { Stack } from 'expo-router';
+import { Stack } from 'expo-router'; /* Stack is used to setup a basic navigation frame for the app, similar to a card stack,
+but for a web/mobile application's screens */
+
 
 export default function RootLayout() {
   return (
-    <Stack screenOptions={{ headerShown: false }}>
+    <Stack screenOptions={{ headerShown: true }}>
       <Stack.Screen name="index" />
       <Stack.Screen name="(auth)" />
       <Stack.Screen name="(tabs)" />
     </Stack>
-  )
+  );
 }
 
 /*import { DarkTheme, DefaultTheme, ThemeProvider } from 'expo-router';
@@ -27,5 +29,5 @@ export default function TabLayout() {
       <AppTabs />
     </ThemeProvider>
   );
-}
-*/
+}*/
+

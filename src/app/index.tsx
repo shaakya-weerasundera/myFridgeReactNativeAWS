@@ -1,10 +1,9 @@
-import { Redirect } from 'expo-router';
+import { Redirect } from 'expo-router'; /* The index page will by default, when the user is not logged in, redirect them to the
+login page */
 
 export default function Index() {
-  return <Redirect href="/(auth)/login"/>;  
+  return <Redirect href="/(auth)/login" />;
 }
-
-
 /*import * as Device from 'expo-device';
 import { Platform, StyleSheet } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
